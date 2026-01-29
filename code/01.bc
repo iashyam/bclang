@@ -1,0 +1,15 @@
+oye bc
+
+// simple first program
+sunbc five = 5;
+sunbc ten = 10;
+
+sunbc add = function(x, y){
+    bhej x+y;
+};
+
+sunbc result = add(five, ten);
+
+bhaunkbc(result);
+
+bhag bc
