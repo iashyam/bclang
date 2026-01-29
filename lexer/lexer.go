@@ -36,6 +36,13 @@ func (l *Lexer) readChar() {
 	l.readPos++
 }
 
+func (l *Lexer) peekChar() byte {
+	if l.readPos >= len(l.input) {
+		return 0
+	}
+	return l.input[l.readPos]
+}
+
 func (l *Lexer) readIdentifier() string {
 	start := l.currentPos
 	for isLetter(l.ch) {
@@ -63,7 +70,21 @@ func (l *Lexer) NextToken() token.Token {
 	l.skipWhitespace()
 	switch l.ch {
 	case '=':
-		tok = token.NewToken(token.ASSIGN, l.ch)
+		if l.peekChar() == '=' {
+			char := l.ch
+			l.readChar()
+			tok = token.Token{Type: token.EQ, Literal: string(char) + string(l.ch)}
+		} else {
+			tok = token.NewToken(token.ASSIGN, l.ch)
+		}
+	case '!':
+		if l.peekChar() == '=' {
+			char := l.ch
+			l.readChar()
+			tok = token.Token{Type: token.NOTEQ, Literal: string(char) + string(l.ch)}
+		} else {
+			tok = token.NewToken(token.BANG, l.ch)
+		}
 	case ';':
 		tok = token.NewToken(token.SEMICOLON, l.ch)
 	case '(':
@@ -78,6 +99,16 @@ func (l *Lexer) NextToken() token.Token {
 		tok = token.NewToken(token.RBRACE, l.ch)
 	case '{':
 		tok = token.NewToken(token.LBRACE, l.ch)
+	case '<':
+		tok = token.NewToken(token.LT, l.ch)
+	case '>':
+		tok = token.NewToken(token.GT, l.ch)
+	case '*':
+		tok = token.NewToken(token.ASTRISK, l.ch)
+	case '/':
+		tok = token.NewToken(token.SLASH, l.ch)
+	case '%':
+		tok = token.NewToken(token.PERCENT, l.ch)
 	case 0:
 		tok.Literal = ""
 		tok.Type = token.EOF

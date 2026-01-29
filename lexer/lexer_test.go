@@ -13,6 +13,11 @@ sunbc add = function(x, y) {
 bhej x + y;
 };
 sunbc result = add(five, ten);
+<, >, /, *, !,%
+jebc (x!=0){
+bhaunkbc(x);
+}harjebc(x==0){
+bhaunkbc(x);};
 `
 	tests := []struct {
 		expectedType    token.TokenType
@@ -54,6 +59,44 @@ sunbc result = add(five, ten);
 		{token.COMMA, ","},
 		{token.IDENT, "ten"},
 		{token.RPAREN, ")"},
+		{token.SEMICOLON, ";"},
+		{token.LT, "<"},
+		{token.COMMA, ","},
+		{token.GT, ">"},
+		{token.COMMA, ","},
+		{token.SLASH, "/"},
+		{token.COMMA, ","},
+		{token.ASTRISK, "*"},
+		{token.COMMA, ","},
+		{token.BANG, "!"},
+		{token.COMMA, ","},
+		{token.PERCENT, "%"},
+		{token.IF, "jebc"},
+		{token.LPAREN, "("},
+		{token.IDENT, "x"},
+		{token.NOTEQ, "!="},
+		{token.INT, "0"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.IDENT, "bhaunkbc"},
+		{token.LPAREN, "("},
+		{token.IDENT, "x"},
+		{token.RPAREN, ")"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.ELIF, "harjebc"},
+		{token.LPAREN, "("},
+		{token.IDENT, "x"},
+		{token.EQ, "=="},
+		{token.INT, "0"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.IDENT, "bhaunkbc"},
+		{token.LPAREN, "("},
+		{token.IDENT, "x"},
+		{token.RPAREN, ")"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
 		{token.SEMICOLON, ";"},
 		{token.EOF, ""},
 	}

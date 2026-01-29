@@ -20,8 +20,18 @@ const (
 	INT   = "INT"
 
 	//operators
-	ASSIGN = "="
-	PLUS   = "+"
+	ASSIGN  = "="
+	PLUS    = "+"
+	ASTRISK = "*"
+	SLASH   = "/"
+	PERCENT = "%"
+	GT      = ">"
+	LT      = "<"
+	BANG    = "!"
+	EQ      = "=="
+	NOTEQ   = "!="
+	GE      = ">="
+	LE      = "<="
 
 	// Delimiters
 	COMMA     = ","
@@ -36,6 +46,11 @@ const (
 	START    = "START"
 	END      = "END"
 	RETURN   = "RETURN"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	ELIF     = "ELIF"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
 )
 
 var Keywords = map[string]TokenType{
@@ -44,6 +59,11 @@ var Keywords = map[string]TokenType{
 	"oyebc":    START,
 	"bhej":     RETURN,
 	"bhagbc":   END,
+	"jebc":     IF,
+	"harjebc":  ELIF,
+	"nistobc":  ELSE,
+	"sahi":     TRUE,
+	"galat":    FALSE,
 }
 
 func LookUpIdent(ident string) TokenType {
