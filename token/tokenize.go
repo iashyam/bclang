@@ -18,6 +18,7 @@ const (
 	//IDENTIFIERS and LITERALS
 	IDENT = "IDENT"
 	INT   = "INT"
+	STR   = "STRING"
 
 	//operators
 	ASSIGN  = "="
@@ -40,6 +41,7 @@ const (
 	RPAREN    = ")"
 	LBRACE    = "{"
 	RBRACE    = "}"
+
 	// Keywords
 	FUNCTION = "FUNCTION"
 	LET      = "LET"

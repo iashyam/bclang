@@ -1,8 +1,6 @@
 package lexer
 
 import (
-	"fmt"
-
 	"github.com/iashyam/bclang/token"
 )
 
@@ -20,6 +18,11 @@ func isLetter(ch byte) bool {
 func isDigit(ch byte) bool {
 	return '0' <= ch && ch <= '9'
 }
+
+func isNumber(ch byte) bool {
+	return '0' <= ch && ch <= '9' || ch == '.'
+}
+
 func New(inp string) *Lexer {
 	l := &Lexer{input: inp}
 	l.readChar()
@@ -53,9 +56,10 @@ func (l *Lexer) readIdentifier() string {
 
 func (l *Lexer) readNumber() string {
 	start := l.currentPos
-	for isDigit(l.ch) {
+	for isNumber(l.ch) {
 		l.readChar()
 	}
+
 	return l.input[start:l.currentPos]
 }
 
@@ -116,13 +120,11 @@ func (l *Lexer) NextToken() token.Token {
 	default:
 		if isLetter(l.ch) {
 			idf := l.readIdentifier()
-			fmt.Print(idf)
 			tok.Type = token.LookUpIdent(idf)
 			tok.Literal = idf
 			return tok
 		} else if isDigit(l.ch) {
 			idf := l.readNumber()
-			fmt.Print(idf)
 			tok.Type = token.INT
 			tok.Literal = idf
 			return tok
